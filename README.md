@@ -62,7 +62,8 @@
 مدل انبار داده بر اساس **Star Schema (شمای ستاره‌ای)** طراحی شده است؛ به این صورت که جدول Fact از طریق کلیدهای خارجی به جدول‌های Dimension مرتبط می‌شود.
 ## شمای کلی پروژه
 
-                   <img width="1566" height="860" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/aa20447c-359c-4fd5-bef0-a05f9b8d445e" />
+                  
+  <img width="1566" height="860" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/aa20447c-359c-4fd5-bef0-a05f9b8d445e" />
 
                        
 ## مهارت‌های مورد تمرین
