@@ -61,48 +61,38 @@
 در این پروژه، مشتریان (`DimCustomer`)، محصولات (`DimProduct`)، دسته‌بندی و زیردسته‌های محصولات (`DimProductCategory` و `DimProductSubcategory`)، جغرافیا (`DimGeography`) و مناطق فروش (`DimSalesTerritory`) از نوع **Dimension** هستند و اطلاعات فروش اینترنتی در جدول `FactInternetSales` از نوع **Fact** ذخیره می‌شود.  
 مدل انبار داده بر اساس **Star Schema (شمای ستاره‌ای)** طراحی شده است؛ به این صورت که جدول Fact از طریق کلیدهای خارجی به جدول‌های Dimension مرتبط می‌شود.
 ## شمای کلی پروژه
-                    ┌──────────────────────┐
-                    │     DimCustomer      │
-                    │ PK: CustomerKey      │
-                    └──────────┬───────────┘
-                               │
-                               │
-┌──────────────────────┐       │       ┌────────────────────────┐
-│     DimProduct       │       │       │   DimSalesTerritory    │
-│ PK: ProductKey       │       │       │ PK: SalesTerritoryKey  │
-└──────────┬───────────┘       │       └────────────┬───────────┘
-           │                   │                    │
-           │                   ▼                    │
-           │       ┌────────────────────────┐       │
-           └──────►│    FactInternetSales   │◄──────┘
-                   │────────────────────────│
-                   │ FK: ProductKey         │
-                   │ FK: CustomerKey        │
-                   │ FK: SalesTerritoryKey  │
-                   │ FK: OrderDateKey       │
-                   │ FK: DueDateKey         │
-                   │ FK: ShipDateKey        │
-                   │ FK: PromotionKey       │
-                   │ FK: CurrencyKey        │
-                   │                        │
-                   │ Measures:              │
-                   │ OrderQuantity           │
-                   │ SalesAmount             │
-                   │ UnitPrice               │
-                   └────────────┬───────────┘
-                                ▲
-                                │
-              ┌─────────────────┴─────────────────┐
-              │                                   │
-   ┌──────────┴───────────┐          ┌────────────┴───────────┐
-   │       DimDate        │          │     DimPromotion       │
-   │ PK: DateKey          │          │ PK: PromotionKey       │
-   └──────────────────────┘          └────────────────────────┘
 
-                       ┌──────────────────────┐
-                       │     DimCurrency      │
-                       │ PK: CurrencyKey      │
-                       └──────────────────────┘
+                   
+flowchart TB
+    C["DimCustomer"]
+    P["DimProduct"]
+    T["DimSalesTerritory"]
+
+    subgraph CENTER[" "]
+        direction LR
+        D["DimDate"]
+        F["FactInternetSales<br/>────────────<br/>SalesOrderNumber<br/>SalesOrderLineNumber<br/>OrderQuantity<br/>SalesAmount"]
+        PR["DimPromotion"]
+    end
+
+    CU["DimCurrency"]
+
+    C --- F
+    P --- F
+    T --- F
+    D --- F
+    PR --- F
+    CU --- F
+
+    style F fill:#D9F2E6,stroke:#16805D,stroke-width:3px,color:#123B2D
+    style C fill:#EAF1FF,stroke:#4776C5,color:#172D50
+    style P fill:#EAF1FF,stroke:#4776C5,color:#172D50
+    style T fill:#EAF1FF,stroke:#4776C5,color:#172D50
+    style D fill:#EAF1FF,stroke:#4776C5,color:#172D50
+    style PR fill:#EAF1FF,stroke:#4776C5,color:#172D50
+    style CU fill:#EAF1FF,stroke:#4776C5,color:#172D50
+    style CENTER fill:transparent,stroke:transparent
+
                        
 ## مهارت‌های مورد تمرین
 
