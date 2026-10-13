@@ -62,36 +62,7 @@
 مدل انبار داده بر اساس **Star Schema (شمای ستاره‌ای)** طراحی شده است؛ به این صورت که جدول Fact از طریق کلیدهای خارجی به جدول‌های Dimension مرتبط می‌شود.
 ## شمای کلی پروژه
 
-                   
-flowchart TB
-    C["DimCustomer"]
-    P["DimProduct"]
-    T["DimSalesTerritory"]
-
-    subgraph CENTER[" "]
-        direction LR
-        D["DimDate"]
-        F["FactInternetSales<br/>────────────<br/>SalesOrderNumber<br/>SalesOrderLineNumber<br/>OrderQuantity<br/>SalesAmount"]
-        PR["DimPromotion"]
-    end
-
-    CU["DimCurrency"]
-
-    C --- F
-    P --- F
-    T --- F
-    D --- F
-    PR --- F
-    CU --- F
-
-    style F fill:#D9F2E6,stroke:#16805D,stroke-width:3px,color:#123B2D
-    style C fill:#EAF1FF,stroke:#4776C5,color:#172D50
-    style P fill:#EAF1FF,stroke:#4776C5,color:#172D50
-    style T fill:#EAF1FF,stroke:#4776C5,color:#172D50
-    style D fill:#EAF1FF,stroke:#4776C5,color:#172D50
-    style PR fill:#EAF1FF,stroke:#4776C5,color:#172D50
-    style CU fill:#EAF1FF,stroke:#4776C5,color:#172D50
-    style CENTER fill:transparent,stroke:transparent
+                   <img width="1566" height="860" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/aa20447c-359c-4fd5-bef0-a05f9b8d445e" />
 
                        
 ## مهارت‌های مورد تمرین
