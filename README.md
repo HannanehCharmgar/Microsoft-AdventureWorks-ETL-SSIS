@@ -60,7 +60,50 @@
 
 در این پروژه، مشتریان (`DimCustomer`)، محصولات (`DimProduct`)، دسته‌بندی و زیردسته‌های محصولات (`DimProductCategory` و `DimProductSubcategory`)، جغرافیا (`DimGeography`) و مناطق فروش (`DimSalesTerritory`) از نوع **Dimension** هستند و اطلاعات فروش اینترنتی در جدول `FactInternetSales` از نوع **Fact** ذخیره می‌شود.  
 مدل انبار داده بر اساس **Star Schema (شمای ستاره‌ای)** طراحی شده است؛ به این صورت که جدول Fact از طریق کلیدهای خارجی به جدول‌های Dimension مرتبط می‌شود.
+## شمای کلی پروژه
+                    ┌──────────────────────┐
+                    │     DimCustomer      │
+                    │ PK: CustomerKey      │
+                    └──────────┬───────────┘
+                               │
+                               │
+┌──────────────────────┐       │       ┌────────────────────────┐
+│     DimProduct       │       │       │   DimSalesTerritory    │
+│ PK: ProductKey       │       │       │ PK: SalesTerritoryKey  │
+└──────────┬───────────┘       │       └────────────┬───────────┘
+           │                   │                    │
+           │                   ▼                    │
+           │       ┌────────────────────────┐       │
+           └──────►│    FactInternetSales   │◄──────┘
+                   │────────────────────────│
+                   │ FK: ProductKey         │
+                   │ FK: CustomerKey        │
+                   │ FK: SalesTerritoryKey  │
+                   │ FK: OrderDateKey       │
+                   │ FK: DueDateKey         │
+                   │ FK: ShipDateKey        │
+                   │ FK: PromotionKey       │
+                   │ FK: CurrencyKey        │
+                   │                        │
+                   │ Measures:              │
+                   │ OrderQuantity           │
+                   │ SalesAmount             │
+                   │ UnitPrice               │
+                   └────────────┬───────────┘
+                                ▲
+                                │
+              ┌─────────────────┴─────────────────┐
+              │                                   │
+   ┌──────────┴───────────┐          ┌────────────┴───────────┐
+   │       DimDate        │          │     DimPromotion       │
+   │ PK: DateKey          │          │ PK: PromotionKey       │
+   └──────────────────────┘          └────────────────────────┘
 
+                       ┌──────────────────────┐
+                       │     DimCurrency      │
+                       │ PK: CurrencyKey      │
+                       └──────────────────────┘
+                       
 ## مهارت‌های مورد تمرین
 
 - طراحی و پیاده‌سازی فرایندهای ETL با SSIS
